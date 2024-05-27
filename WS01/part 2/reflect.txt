@@ -1,0 +1,20 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              17 May 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 1 - Reflection
+
+In this workshop, there are a few key concepts covered.
+
+The first concept would be understanding the difference between internal and external linkage. In short, linkage would be considered as the visibility of names in different source files. If the name consists of internal linkage, which means it would be visible within the local source file. On the other hand, external linkage would enable the name to be visible in other translation units. For instance, in my code, the global variables g_taxrate and g_dailydiscount are declared with the extern keyword.
+
+Secondly, static variables are involved in the workshop as well, which is in my display() function. The index is initialized to 0 when the function is called for the first time, while its value would be retained between subsequent function calls. It would allow us to monitor how many times of display() function has been called so as to display the index of each food order recorded in the output.
+
+Thirdly, while completing part 2 of the workshop, I have made several key changes to upgrade the FoodOrder class, including applying rule of three (copy constructor, copy assignment operator, destructor) towards the solution. That would facilitate deep copy of the m_foodDesc, which is a dynamic data member for resource management. Moreover, in the read() function, the food description is read via a temporary string instead of char, which would make the code safer and easier to maintain.
+
+Lastly, an issue of over-deleting memory allocated would be happened while handling the copy constructor and copy assignment operator respectively. This would lead to conditional jumps while going through the code in matrix. Therefore, what I did is to review the logic of the code and ensure that all memory allocation is handled properly.

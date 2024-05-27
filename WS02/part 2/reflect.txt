@@ -1,0 +1,20 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              24 May 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 2 - Reflection
+
+In this workshop, there are several key concepts covered within and outside of the teaching materials.
+
+First of all, we are asked to construct a TimedTask module, which is applied for recording and displaying the elapsed time for running various functions in the ProteinDatabase module. In the code, the std::chrono library is used for high-resolution timing. On this, we could apply the utilities to handle multiple features, such as durations, clocks and time points. In terms of measuring the time duration of tasks, we include the properties std::chrono::steady_clock and std::chrono::duration_cast for necessary time measurement.
+
+Secondly, the ProteinDatabase introduced the main theme of the module, which is adding the feature of move constructor and move assignment operator, considered as the extra elements for rule of 5 in C++. Apart from the default constructor, there is a 1-argument constructor built to take a file name as an argument, which is expected to contain protein sequences in FASTA format. In this function, we have to include the File I/O property such as std::ifstream to open and read the file content. Furthermore, we need to allocate memory for the protein array. After that, for resetting the file stream, I have used file.clear() to reset the error flags of the file stream. Meanwhile, file.seek(0, std::ios::beg) is used to move the position of the next character to be extracted from the input stream to the beginning of the file. For the move semantics, instead of copying resources data to another newly created object, the pointer of the m_proteinArr is assigned to the dynamically allocated array of the protein sequence of the src object and the m_proteinArr pointer in the source object is set to nullptr as the ownership of the resources is changed. The logic is similar for the move assignment operator with the addition of checking self assignment.
+
+Lastly, based on the output, it is observed that there is a significant time difference between the copy and move semantics in C++. The situation could be explained as follow. In copy semantics, there is a new copy of the object created. The program has to allocate extra memory as well as copying each element from the source object to the new object. In this case, the given data of the proteinsequence is pretty large, so that it would cause more time to operate.
+
+On the other hand, the move semantics simply operates by transferring the ownership of the resources from the source object to the target object, eliminating the process of creating a copy. Hence, less procedures involved by merely making changes to the pointers, and the resources could be handled in a more efficient way.
