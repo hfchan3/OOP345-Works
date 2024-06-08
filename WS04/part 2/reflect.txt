@@ -1,0 +1,27 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              7 June 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 4 - Reflection
+
+By doing this workshop, it allows me to get some hand-on experience on understanding the difference between composition, aggregation and association when we investigate the relationship between objects. Moreover, the workshop also enhance my application of the copy and move semantics in different modules.
+
+Firstly, composition implies that the classes have the "has-a" relationship in between and the parent object would implement complete ownership over the child object. The child object could not exist if the parent object destroys, and the composition is incomplete without any child object as its components. Unlike inheritance, any update towards the child class may not affect the child class. However, member functions added to the child class would require forwarding member functions in the parent class. For example, in the workshop, the relationship between Restaurant and Reservation objects are considered as composition. It is because Restaurant owns the lifecycle of the Reservation object. Furthermore, when we take a look at the destructor in the Restaurant module, it is observed that the reservations in the Restaurant class would be destroyed when the Restaurant class is destroyed.
+Restaurant::~Restaurant() {
+    for (size_t i = 0; i < numRes; i++) {
+        delete reservations[i];
+    }
+    delete[] reservations;
+}
+
+Secondly, aggregation has more flexibility than composition as it does not own the lifecycle of the child object even though they are still in a "has-a" relationship. For example, aggregation is applied in the ConfirmationSender class as it holds pointers to the Reservation objects but does not have ownership. ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res) {}
+It holds the address simply because of keep tracking the Reservation objects. Their existence is independent of the ConfirmationSender Object.
+
+We may also notice the application of composition, aggregation by observing the code in the copy and move semantics of the objects. In Restaurant object, it involves deep copy in the copy semantics and take over the ownership of Reservation objects in move semantics. On the other hand, in the ConfirmedSender object, it involves copy of the pointers to the existing Reservation objects in copy semantics while transferring the pointers while doing move semantics.
+
+In this case, association is somehow looks similar towards aggregation, as ConfirmedSender and Reservation objects imply these two relationship. However, to be specific, association means there is no ownership between objects and each object itself is complete without the other. They even do not require the "has-a" relationship and only simply holds the pointers of the Reservation objects. In facr, the Reservation objects could also hold the pointers of the ConfirmedSender as well since the relationship is bidirectional.

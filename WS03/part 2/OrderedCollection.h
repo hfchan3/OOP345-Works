@@ -61,7 +61,6 @@ namespace seneca {
         os.unsetf(std::ios::fixed);
         Collection<T, 72>::print(os);
     }
-
 }
 
 #endif // SENECA_ORDEREDCOLLECTION_H

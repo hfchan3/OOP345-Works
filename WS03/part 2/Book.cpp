@@ -55,7 +55,7 @@ namespace seneca {
 	std::ostream& Book::print(std::ostream& os) const {
 		if (isValid()) {
 			std::string firstField = m_title + "," + std::to_string(m_numChapters) + "," + std::to_string(m_numPages);
-			std::string secondField = "(" + std::to_string(static_cast<double>(m_numPages) / m_numChapters) + ")";
+			std::string secondField = "(" + std::to_string(pagesPerChapter()) + ")";
 			os.width(56);
 			os.setf(std::ios::right);
 			os << firstField << " | ";

@@ -1,0 +1,24 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              28 May 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 3 - Reflection
+
+In this workshop, I have applied the concept of designing multiple template classes, including creating template of a class variable. For example, in the Collection class templates, the class variables m_smallestItem and m_largestItem are defined as static member variables templated with type T and unsigned C respectively. In the Collection class, multiple templates are designed for specializing the Book type with various capacities respectively. (10 and 72 in the code). In the supplied w4 module, it is observed that both Collection and OrderedCollection classes are instantiated for specific type, such as "seneca::OrderedCollection<Book> bookCollection;"
+"seneca::Collection<int, 50> intCollection;"
+The OrderedCollection class is also built as a derived class of Collection with a defined capacity of 72, such as:
+template <typename T>
+class OrderedCollection : public Collection<T, 72> {
+    public:
+        bool operator+=(const T& item);
+        void print(std::ostream& os) const;
+};
+While creating the Book class, there are several members to be included for facilitating the functionality, which involves the constructors for initialization, setters and getters as the modifiers for accessing the private data members. Furthermore, the isValid function is used to ensure the Book objects could only handle valid data. The comparison operators are added for enabling sorting and comparison operations for displaying the collections. Lastly, the helper operator function is used to support the insertion behaviour of the Book objects.
+In the Book class, getSmallestItem and getLargestItem cannot be applied as queries due to several reasons. Firstly, both are considered as static functions as they could only operate on static class members and shared across all instances of the class. These members are made to be static to ensure that all instances refer to and modify a single set of smallest and largest items. It could maintain consistency and synchronization of the entire class. Lastly, these members are initialized with the range 9999 to -9999 for comparison. The static members would be modified by set functions while new items added to any collection instance. Due to dynamic modification due to incoming items, hence the queries could not used.
+Lastly, the program involves definition of class objects outside the class, so as to initialize static members in an appropriate way, especially when handling with templates which may be initialized to different values based on the type.
+The Book object is specialized with size 10 in order to allow the operation of the comparison logic for book, with the smallest and largest items initialized to values specific to books. After that, as there is instantiation of the Book class, by initializing Book object and 72, the Collection class could work properly in other capacity with the appropriate logic applied.
