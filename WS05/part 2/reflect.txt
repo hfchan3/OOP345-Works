@@ -1,0 +1,22 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              10 June 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 5 - Reflection
+
+In this workshop, I have the chance to explore the concepts of functor and lambda expression. After reviewing the course notes, it is understood that functor is described as a class which overload the function call operator "operator()". It allows functions to be invoked when objects are created. It is discovered that functors are useful when the operation requires state or at the time when it needs to be passed around as a parameter to algorithms. With this, it could provide more flexibility for data storage and could encapsulate more complicated behaviours.
+
+Lambda expression is known as an anonymous function object which is able to capture variables from the surrounding scope in which it is defined. It suggests a simple way to define simple behaviours inline without the need to define a separate class.
+
+In general, functors are useful when the operators requires maintaining state between calls or customization beyond simple function pointers. On the other hand, lambdas are suitable for short, one-way operations where creating a separate functor would be overkill.
+
+Secondly, another important concept learnt in this workshop would be error handling. In SpellChecker module, we have coded the exception when there is a bad file name. After in w5p2.cpp, we would use try and catch syntax to do the error handling part to avoid unhandled exceptions. Instead of using this approach, we could apply return status to handle the file operation by using a Boolean type to indicate whether the file is successfully opened or not.
+
+Thirdly, in order to reduce duplication of code in Movie and Book classes, we would apply inheritance principle, where one of the classes is defined as base class for setting up the structure, and the derived class would add on to the missing definitions. Hence, we don't need to repeat the same code in two different classes and could call the method from the base class instead.
+
+Lastly, both Movie and Book classes are required to have their own default constructors as they need to initializes their objects from specific data sources. If they are kept, it could make sure that the objects are initialized correctly and consistently according to their intended usage. It could support proper design practice and avoid error due to unintended object states.
