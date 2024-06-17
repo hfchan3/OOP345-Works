@@ -9,8 +9,8 @@ workshops and assignments. This submitted piece of work has not been shared with
 **************************************************************************************************************************************/
 #include <iostream>
 #include <fstream>
-#include <utility>
 #include <chrono>
+#include <utility>
 #include <string>
 #include "TimedTask.h"
 
@@ -50,7 +50,7 @@ namespace seneca {
 			ostr.unsetf(std::ios::right);
 			ostr << " " << tasks.taskArr[i].unitsOfTime << std::endl;
 		}
-		ostr << "--------------------------\n";
+		ostr << "--------------------------" << std::endl;
 		return ostr;
 	}
 }

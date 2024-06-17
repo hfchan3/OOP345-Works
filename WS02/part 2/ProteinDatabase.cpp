@@ -24,7 +24,7 @@ namespace seneca {
 
 		// Count the number of protein sequences
 		for (; std::getline(file, line);) {
-			if (!line.empty() && line[0] == '>') {
+			if (line[0] != '>') {
 				count++;
 			}
 		}
@@ -43,7 +43,7 @@ namespace seneca {
 
 		// Read and store protein sequences
 		for (; std::getline(file, line);) {
-			if (!line.empty() && line[0] == '>') {
+			if (line[0] != '>') {
 				if (isProtein) {
 					index++;
 				}

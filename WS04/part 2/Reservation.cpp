@@ -64,8 +64,8 @@ namespace seneca {
 	}
 
 	void Reservation::update(int day, int time) {
-		partyDay = day;
-		partyHour = time;
+		this->partyDay = day;
+		this->partyHour = time;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Reservation& res) {
