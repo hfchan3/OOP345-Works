@@ -25,8 +25,8 @@ void printHeader(std::string label) {
 
 void printRInfo(int count, size_t bytes, std::string path) {
     std::cout << std::left << std::setw(2) << (count >= 0 ? std::to_string(count) : "")
-              << std::right << std::setw(12) << std::to_string(bytes) + " bytes "
-              << std::left << path << std::right << std::endl;
+        << std::right << std::setw(12) << std::to_string(bytes) + " bytes "
+        << std::left << path << std::right << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -55,7 +55,8 @@ int main(int argc, char** argv) {
 
     try {
         *root += flag_img_test;
-    } catch(...) {
+    }
+    catch (...) {
         std::cout << "**EXPECTED EXCEPTION: flag.jpg image already exists in the root\n" << std::endl;
         delete flag_img_test;
     }
@@ -82,11 +83,11 @@ int main(int argc, char** argv) {
 
     std::vector<seneca::OpFlags> oflags;
 
-    if(!root->find(".flag.jpg")) {
+    if (!root->find(".flag.jpg")) {
         std::cout << "**EXPECTED ERROR: File .flag.jpg not found in " << root->path() << "\n" << std::endl;
     }
 
-    if(root->find("flag.jpg")) {
+    if (root->find("flag.jpg")) {
         std::cout << "Found " << flag_img->name() << " in " << root->path() << " with the ALL flag\n" << std::endl;
     }
 
@@ -97,7 +98,7 @@ int main(int argc, char** argv) {
     oflags.push_back(seneca::OpFlags::RECURSIVE);
     if (root->find("harry-potter.webm", oflags)) {
         std::cout << "Found " << harry_potter->name() << " in " << root->path() << " recursively\n"
-                  << std::endl;
+            << std::endl;
     }
 
     ::printLine();

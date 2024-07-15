@@ -1,0 +1,15 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              13 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 7 - Reflection
+
+After completing this workshop, I have consolidated my understanding by utilising various STL functions and algorithms in C++.
+Firstly, in order to comply with the workshop requirement, I have to use multiple STL functions so as to avoid duplication of usage in another function. Throughout the code, I have used std::for_each in the showGoods function, which helps to iterate over the goodsCollection as well as accumulating total price and stock. In the sortBakery function, I used the std::sort function which could give a more efficient algorithm to sort the items instead of a manually built sort algorithm, such as bubble sort. In the inStock function, I used the std::find_if function for simplifying the search logic in checking if a specific good is in stock. In the outOfStock function, I used the std::copy_if function to copy the elements which satisfies the out-of-stock conditions, getting rid of the need of explicit manual loops. In the combine function, I used the std::merge function to merge the two sorted ranges of baked goods, with the sortBakery function being called first.
+By using the STL algorithms, they have provided an array of advantages over conventional methods like manual loops. The first one is to enhance the efficiency of the code as the STL algorithms are highly optimized which allows them to have a better performance. The second advantage is to increase the code readability as it abstracts most of the complicated operation by simply calling the function instead. The third advantage is to enhance code reliability because those algorithms are thoroughly tested and their performance are ensured to be reliable, which could minimize the opportunity of getting bugs in operations.
+In the sortBakery function, the goodsCollection was using std::vector as the container. However, if std::list is used instead, it would make a different implementation as follow: In std::vector, std::sort is applied as std::vector would provide random-access iterators. In std::list, it provides bidirectional iterators instead of random-access iterators. Hence, std::list::sort should be used instead of std::sort.

@@ -1,0 +1,19 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              27 June 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 6 - Reflection
+
+After completing this workshop, it has helped me to consolidate my understanding related to STL containers, especially introduction to the concept of vector class template, a container, which handles data structures with dynamic size and the elements in specific order. These classes would apply contiguous storage locations for the elements but their size could be adjusted as required instead of fixed in the case of array.
+
+In C++, for dynamically allocated objects, it is very important to delete memory allocated in the vector of resources so as to avoid memory leaks. In the Directory class, the vector container 'm_contents' holds the pointers to the Resource objects. We need to employ a destructor in the Destructor class to release all the allocated memory whenever the directory resource is destroyed.
+
+Secondly, to call specific functions for a Directory objects stored in a Resource*, we need to 
+introduce dynamic casting in order to enable the program to verify if a pointer to a Resource object is exactly pointing to a Directory object. It allows access to the specific functions in Directory object. This crucial step is required for the vector in m_contents in Directory class to hold both File and Directory objects via their base class Resources based on polymorphism.
+
+Thirdly, it is observed that std::vector<seneca::Resource*> is more preferrable to store a collection of filesystem resources as pointers. It is because it enables storing pointers to the polymorphic objects. However, if we use std::vector<seneca::Resource> to store objects would causing slicing of objects, meaning that the polymorphic characteristics would be lost. Moreover, there would be more flexibility to manage object lifetimes if pointers are used and effectively avoid copying redundant objects. 
