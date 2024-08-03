@@ -67,7 +67,7 @@ namespace seneca {
         m_cntCustomerOrder = g_pending.size();
     }
 
-	void LineManager::reorderStations() {
+    void LineManager::reorderStations() {
         m_activeLine.clear();
         Workstation* current = m_firstStation;
 
@@ -75,7 +75,7 @@ namespace seneca {
             m_activeLine.push_back(current);
             current = current->getNextStation();
         }
-	}
+    }
 
     bool LineManager::run(std::ostream& os) {
         static size_t iteration = 0;
@@ -101,9 +101,9 @@ namespace seneca {
         return (m_cntCustomerOrder == g_completed.size() + g_incomplete.size());
     }
 
-	void LineManager::display(std::ostream& os) const {
-		std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws) {
-			ws->display(os);
-		});
-	}
+    void LineManager::display(std::ostream& os) const {
+        std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* ws) {
+	    ws->display(os);
+	});
+    }
 }
