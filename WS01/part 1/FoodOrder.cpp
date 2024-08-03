@@ -11,11 +11,9 @@ namespace seneca
 {
 
     // `read()`: a modifier that receives an `istream` reference.
-    void FoodOrder::read(std::istream& istr)
-    {
+    void FoodOrder::read(std::istream& istr) {
         char y_n{};
-        if (!istr.fail())
-        {
+        if (!istr.fail()) {
             istr.getline(this->cstr, CSTR_MAX, ',');
             istr.getline(this->cstr_desc, CSTR_STRING, ',');
             istr >> price_value;
@@ -29,27 +27,22 @@ namespace seneca
 
     // `display()`: a query that displays to the screen the content of an `Food Order`
 
-    void FoodOrder::display() const
-    {
+    void FoodOrder::display() const {
         static int counter = 0;
         cout << left << setw(2) << ++counter << ". ";
         double priceTaxed = price_value + (price_value * g_taxrate);
-        if (cstr[0] != '\0')
-        {
+        if (cstr[0] != '\0') {
             cout << left << setw(10) << cstr << "|"
                 << left << setw(25) << cstr_desc << "|" << left << setw(12) << fixed << setprecision(2) << priceTaxed << "|";
 
-            if (dailySpecial)
-            {
+            if (dailySpecial) {
                 cout << right << setw(13) << fixed << priceTaxed - g_dailydiscount << std::endl;
             }
-            else
-            {
+            else {
                 cout << endl;
             }
         }
-        else
-        {
+        else {
             cout << "No Order" << endl;
         }
     }
