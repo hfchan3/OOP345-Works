@@ -1,6 +1,6 @@
 /*************************************************************************************************************************************
-Name:				Hiu Fung CHAN
-Seneca Email :		hfchan3@myseneca.ca
+Name:			    Hiu Fung CHAN
+Seneca Email :	    hfchan3@myseneca.ca
 Seneca Student ID : 106184237
 Date :				27 May 2024
 
