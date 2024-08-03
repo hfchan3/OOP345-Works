@@ -1,3 +1,13 @@
+/*************************************************************************************************************************************
+Name:				Hiu Fung CHAN
+Seneca Email :		hfchan3@myseneca.ca
+Seneca Student ID : 106184237
+Date :				24 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments.This submitted piece of work has not been shared with any other student or 3rd party content provider.
+***************************************************************************************************************************************/
+
 // Workshop 9 - Multi-Threading, Thread Class
 
 #include <iostream>
@@ -54,23 +64,39 @@ namespace seneca
 		//         into variables "total_items" and "data". Don't forget to allocate
 		//         memory for "data".
 		//       The file is binary and has the format described in the specs.
+		std::ifstream dataFile(filename, std::ios::binary);
+		if (dataFile) {
+			// Read the first 4 bytes as the total number of the data items
+			dataFile.read(reinterpret_cast<char*>(&total_items), sizeof(total_items));
 
+			data = new int[total_items];
+			dataFile.read(reinterpret_cast<char*>(data), sizeof(int) * total_items);
 
+			std::cout << "Item's count in file '" << filename << "': " << total_items << std::endl;
+			std::cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
+				<< data[total_items - 3] << ", " << data[total_items - 2] << ", "
+				<< data[total_items - 1] << "]\n";
 
+			// Following statements initialize the variables added for multi-threaded 
+			//   computation
+			num_threads = n_threads;
+			averages = new double[num_threads] {};
+			variances = new double[num_threads] {};
+			p_indices = new int[num_threads + 1] {};
+			for (int i = 0; i < num_threads + 1; i++)
+				p_indices[i] = i * (total_items / num_threads);
 
-		std::cout << "Item's count in file '"<< filename << "': " << total_items << std::endl;
-		std::cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
-		          << data[total_items - 3] << ", " << data[total_items - 2] << ", "
-		          << data[total_items - 1] << "]\n";
-
-		// Following statements initialize the variables added for multi-threaded 
-		//   computation
-		num_threads = n_threads; 
-		averages = new double[num_threads] {};
-		variances = new double[num_threads] {};
-		p_indices = new int[num_threads+1] {};
-		for (int i = 0; i < num_threads+1; i++)
-			p_indices[i] = i * (total_items / num_threads);
+			p_indices[num_threads] = total_items;
+		}
+		else {
+			std::cerr << "Could not open file '" << filename << "' for reading\n";
+			total_items = 0;
+			data = nullptr;
+			averages = nullptr;
+			variances = nullptr;
+			p_indices = nullptr;
+			num_threads = 0;
+		}
 	}
 
 	ProcessData::~ProcessData() {
@@ -92,8 +118,67 @@ namespace seneca
 	//   part of the data. Add computed variance-factors to obtain total variance.
 	// Save the data into a file with filename held by the argument `target_file`.
 	// Also, read the workshop instruction.
+	int ProcessData::operator()(const std::string& filename, double& avg, double& var) {
+		int status = -1;
 
+		if (*this) {
+			std::vector<std::thread> threads;
 
+			for (int i = 0; i < num_threads; i++) {
+				auto bound_avg_func = std::bind(
+					computeAvgFactor,
+					data + p_indices[i],
+					p_indices[i + 1] - p_indices[i],
+					p_indices[i + 1] - p_indices[i],
+					std::ref(averages[i])
+				);
+				threads.push_back(std::thread(bound_avg_func));
+			}
 
+			for (auto& t : threads) {
+				if (t.joinable()) t.join();
+			}
 
+			avg = 0.0;
+			for (int i = 0; i < num_threads; i++) {
+				avg += averages[i];
+			}
+			avg /= num_threads;
+
+			threads.clear();
+
+			for (int i = 0; i < num_threads; i++) {
+				auto bound_var_func = std::bind(
+					computeVarFactor,
+					data + p_indices[i],                
+					p_indices[i + 1] - p_indices[i],
+					p_indices[i + 1] - p_indices[i],   
+					avg,
+					std::ref(variances[i])               
+				);
+				threads.push_back(std::thread(bound_var_func));
+			}
+
+			for (auto& t : threads) {
+				if (t.joinable()) t.join();
+			}
+
+			var = 0.0;
+			for (int i = 0; i < num_threads; i++) {
+				var += variances[i];
+			}
+			var /= num_threads;
+
+			std::ofstream outFile(filename, std::ios::binary);
+			if (outFile) {
+				outFile.write(reinterpret_cast<const char*>(&total_items), sizeof(total_items));
+				outFile.write(reinterpret_cast<const char*>(data), sizeof(int) * total_items);
+				status = 0;
+			}
+			else {
+				std::cerr << "Could not open file '" << filename << "' for writing\n";
+			}
+		}
+		return status;
+	}
 }

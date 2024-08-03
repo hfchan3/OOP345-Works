@@ -1,0 +1,30 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              16 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 8 - Reflection
+
+Upon completing this workshop, I have obtained a brief understanding on the usage of smart pointers as well as the Singleton Pattern, which ensures that there is only one instance for the class and includes a global point of access to that instance. Hence, the shared source like a database could be handled better. Furthermore, for smart pointers such as std::shared_ptr would be important for safeguarding the memory management automatically.
+
+The reason why std::unique_ptr could not be chosen for the Singleton pattern is unique pointers are set to have exclusive management of the object's lifetime, so that they could not be copied.
+In this case, it prohibits sharing the single instance of the Database class throughout different parts of the program. Hence, we need to use std::shared_ptr to enable multiple references to the single instance of the class.
+
+Secondly, regarding the transformation of the class into a templated version, I have first revised the class definition by including a template parameter (template <typename T>). Then, I modified all member functions to adopt the template parameter instead of concrete types. After that, data members (keys and values) are ensured to be able to handle the template parameter properly. Lastly, I included specialization of the encryptDecrypt function suitable for various template types.
+
+In this workshop, we have applied the Singleton implementation. Other than that, we could add another static local variable inside the getInstance function like:
+static Database getInstance(const std::string& filename) {
+    static Database instance(filename);
+    return instance;
+}
+This alternative could ensure that the instance is created once only and would automatically be destroyed as long as the program exits.
+
+It is observed that the Database class has involved a resource attribute (the instance), without explicit definition of the copy or move semantics. This case would not be considered as a bug due to the fact that we need to ensure that no undesired copies or move operations would be occurred for the Singleton pattern by keeping one instance of the class.
+
+Another observation in this workshop is witnessing that the custom constructor is called twice. This happens because of incorrect initialization in the getInstance() function. The static data member instance may not be initialized or managed properly, and it could cause the creation of multiple instances. Another reason is we have the specializations of the template for two different types, which are std::string and long long. They would have their own version of the static data member instance. 
+
+

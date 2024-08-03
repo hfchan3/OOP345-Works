@@ -1,0 +1,21 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              24 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Workshop 9 - Reflection
+
+In this workshop, I have obtained a deeper understanding on the topics of binary file handling, function binding and more importantly multi-threading.
+
+Firstly, using binary files could enable faster read/write operations and the file size could be reduced compared with the normal text files. In the workshop, we have added the line: std::ifstream infile(filename, std::ios::binary); to open the file in binary format. It could avoid the I/O overhead and ensures that the data is stored in a compact format while handling with large datasets.
+
+Secondly, in this workshop, we have used std::bind to create callable objects which is executable by threads, it allows me to pass the required parameters to the computeAvgFactor and computeVarFactor. Hence, we could understand that function binding is important in terms of its simplicity, flexibility and reusability. In view of flexibility, function binding allows partial application of functions, where some arguments are fixed and the rest could be provided later. This would be very useful in the aspect of  multi-threading as we need to pass specific arguments to functions executed by different threads. Another to consider is reusability, as the bound functions could be reused in different contexts without having to repeatedly specify the same arguments.
+
+Thirdly, mutli-threading concept is applied to perform parallel execution of tasks. It could greatly reduce the time needed for computations on large datasets. The average and variance of data are computed in parallel way, which involves dividing the data into parts and process each part in a separate thread. The performance of the program has greatly improved and the resources could be managed in an efficient manner. In real-time applications, multi-threading could also improve responsiveness by undergoing background tasks concurrently with the main application logic.
+
+
+

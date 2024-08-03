@@ -1,3 +1,13 @@
+/*************************************************************************************************************************************
+Name:				Hiu Fung CHAN
+Seneca Email :		hfchan3@myseneca.ca
+Seneca Student ID : 106184237
+Date :				20 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments.This submitted piece of work has not been shared with any other student or 3rd party content provider.
+***************************************************************************************************************************************/
+
 // Workshop 9 - Multi-Threading, Thread Class
 
 #include <iostream>
@@ -51,15 +61,22 @@ namespace seneca
 		//         into variables "total_items" and "data". Don't forget to allocate
 		//         memory for "data".
 		//       The file is binary and has the format described in the specs.
+		std::ifstream file(filename, std::ios::binary);
+		if (file) {
+			file.read(reinterpret_cast<char*>(&total_items), sizeof(total_items));
+			data = new int[total_items];
+			file.read(reinterpret_cast<char*>(data), sizeof(int) * total_items);
 
-
-
-
-
-		std::cout << "Item's count in file '"<< filename << "': " << total_items << std::endl;
-		std::cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
-		          << data[total_items - 3] << ", " << data[total_items - 2] << ", "
-		          << data[total_items - 1] << "]\n";
+			std::cout << "Item's count in file '" << filename << "': " << total_items << std::endl;
+			std::cout << "  [" << data[0] << ", " << data[1] << ", " << data[2] << ", ... , "
+				<< data[total_items - 3] << ", " << data[total_items - 2] << ", "
+				<< data[total_items - 1] << "]\n";
+		}
+		else {
+			std::cerr << "Could not open file '" << filename << "'\n";
+			total_items = 0;
+			data = nullptr;
+		}
 	}
 
 	ProcessData::~ProcessData()
@@ -67,11 +84,25 @@ namespace seneca
 		delete[] data;
 	}
 
-
 	// TODO Implement operator(). See workshop instructions for details.
+	int ProcessData::operator()(const std::string& filename, double& avg, double& var) {
+		int status = -1;
 
+		if (*this) {
+			computeAvgFactor(data, total_items, total_items, avg);
+			computeVarFactor(data, total_items, total_items, avg, var);
 
-
-
+			std::ofstream outFile(filename, std::ios::binary);
+			if (outFile) {
+				outFile.write(reinterpret_cast<const char*>(&total_items), sizeof(total_items));
+				outFile.write(reinterpret_cast<const char*>(data), sizeof(int)* total_items);
+				status = 0;
+			}
+			else {
+				std::cerr << "Could not open file '" << filename << "' for writing\n";
+			}
+		}
+		return status;
+	}
 
 }

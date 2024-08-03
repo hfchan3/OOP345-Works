@@ -66,7 +66,7 @@ namespace seneca {
             totalPrice += good.m_price;
             totalStock += good.m_stock;
             os << good << std::endl;
-            });
+        });
 
         os << "Total Stock: " << totalStock << std::endl;
         os << "Total Price: " << std::fixed << std::setprecision(2) << totalPrice << std::endl;
@@ -119,7 +119,7 @@ namespace seneca {
     bool Bakery::inStock(const std::string& description, BakedType type) const {
         auto it = std::find_if(goodsCollection.begin(), goodsCollection.end(), [&](const BakedGood& good) {
             return good.m_description == description && good.m_type == type && good.m_stock > 0;
-            });
+        });
         return it != goodsCollection.end();
     }
 
@@ -135,8 +135,7 @@ namespace seneca {
 
         // Partially sort the vector by price
         std::partial_sort_copy(outOfStockGoods.begin(), outOfStockGoods.end(),
-            outOfStockGoods.begin(), outOfStockGoods.end(),
-            [](const BakedGood& bg1, const BakedGood& bg2) {
+            outOfStockGoods.begin(), outOfStockGoods.end(), [](const BakedGood& bg1, const BakedGood& bg2) {
                 return bg1.m_price < bg2.m_price;
             });
 
