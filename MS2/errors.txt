@@ -1,0 +1,9 @@
+CustomerOrder.cpp: In member function ‘void seneca::CustomerOrder::display(std::ostream&) const’:
+CustomerOrder.cpp:104:41: error: ‘setw’ was not declared in this scope; did you mean ‘std::setw’?
+  104 |                 os << m_name << "- " << setw(m_widthField) << m_product << std::endl;
+      |                                         ^~~~
+      |                                         std::setw
+In file included from CustomerOrder.cpp:2:
+/usr/local/gcc/13.2.0/include/c++/13.2.0/iomanip:227:3: note: ‘std::setw’ declared here
+  227 |   setw(int __n)
+      |   ^~~~

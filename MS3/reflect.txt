@@ -1,0 +1,24 @@
+/*************************************************************************************************************************************
+Name:              Hiu Fung CHAN
+Seneca Email:      hfchan3@myseneca.ca
+Seneca Student ID: 106184237
+Date:              28 July 2024
+
+I declare that this submission is the result of my own work and I only copied the code that my professor provided to complete my
+workshops and assignments. This submitted piece of work has not been shared with any other student or 3rd party content provider.
+**************************************************************************************************************************************/
+OOP345 Project - Reflection
+
+This project has provided me with a valuable experience in understanding some critical areas in building software using C++. The entire project is divided into 3 milestones, each has a focus on different aspects of the simulation system. Here I would like to share some of the challenges I encountered in each milestone.
+
+First of all, milestone 1 appeared to be the simplest one by constructing the Utilities and Station module. The Utilities module involves functions to parse string data and extract tokens using a delimiter. There was a challenge while implementing the extractToken function, my initial version of the function has passed the requirement listed in the milestone 1 output, however it fails while implementing the output for milestone 2. After that, I realized that I have to take care of the edge cases as well, such as consecutive delimiters and strings with leading or trailing spaces.
+
+Secondly, for the Station module, it involves managing station-specific information, such as item names, serial numbers and quantities. The key issue is to build a constructor which could populate a Station object using a line of input data. We have to handle the data types cautiously and ensure that every field is correctly assigned with the use of a local Utilities object to extract tokens and populate instance variables. Moreover, we need to compare and set widths dynamically based on the input data by updating the variable m_widthField.
+
+For Milestone 2, I needed to incorporate the CustomerOrder module which should be able to manage a dynamically allocated array of pointers to Item objects. This part allowed me to practice the usage of Rule of 5 again, where I have the default constructor, 1-argument constructor to parse the input string to populate order details using a Utilities object, and move constructor and move operator assignment. However, the copy semantics should be prohibited due to the fact that we have to avoid undesirable duplication of dynamically allocated resources and we need to throw an exception for the copy constructor.
+
+Lastly, Milestone 3 serves as the capstone of the entire project. I have to include a LineManager class, which manages the flow of CustomerOrder objects via multiple Station objects along the assembly line. For tracking and managing the completed and incomplete orders, we applied the concept of std::deque to manage these orders. std::deque is noted as the double-ended queue and a sequence container from the C++ standard library which enables fast insertions and deletions at the beginning as well as the end of the sequence. It works very similar to the std::vector but has more flexibility on the position where elements could be added or removed. In this case, as orders are processed and moved to either m_completed or m_incomplete deques, the double-ended nature offered by std::deque would allow efficient addition and removal operations at both ends, and helpful for order flow management in a dynamical way. In this milestone, I had difficulties in designing an efficient mechanism to coordinate the flow of orders through multiple stations. Eventually, I built a robust routing mechanism in the LineManage class which tracks the current station for each order and moves the order to the next suitable station. In the LineManager class, I used a vector of pointers to the Workstation objects to represent the assembly line, whereas each order could keep track of its current position and moves to the following station based on the pre-defined routes. Secondly, I experienced undesired response for the error handling part for the case of recovering gracefully to process other orders continuously. To solve this, I implemented try-catch blocks and conditional checks at each station and in the LineManager in order to detect and handle errors gracefully. It greatly helped me to receive meaningful feedback during the debugging process.
+
+
+
+
