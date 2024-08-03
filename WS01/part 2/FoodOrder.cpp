@@ -22,8 +22,7 @@ double g_dailydiscount{};
 namespace seneca
 {
     // Default Constructor
-    FoodOrder::FoodOrder()
-    {
+    FoodOrder::FoodOrder() {
         m_custName[0] = '\0';
         m_foodDesc = nullptr;
         m_price = 0;
@@ -31,16 +30,13 @@ namespace seneca
     }
 
     // Destructor
-    FoodOrder::~FoodOrder()
-    {
+    FoodOrder::~FoodOrder() {
         delete[] m_foodDesc;
     }
 
     // Modifier to read data from an input stream into the FoodOrder object
-    void FoodOrder::read(std::istream& in)
-    {
-        if (in)
-        {
+    void FoodOrder::read(std::istream& in) {
+        if (in) {
             char status{}; 
             in.getline(m_custName, NAME_LEN, ',');
             if (m_foodDesc) {
@@ -66,15 +62,13 @@ namespace seneca
     }
 
     // Query to display the details of a FoodOrder object in a formatted way
-    void FoodOrder::display() const
-    {
+    void FoodOrder::display() const {
         static int index = 0;
         cout.setf(ios::left);
         cout.width(2);
         cout << ++index << ". ";
         double taxedPrice = m_price + (m_price * g_taxrate);
-        if (m_custName[0] != '\0')
-        {
+        if (m_custName[0] != '\0') {
             cout.width(10);
             cout << m_custName << "|";
             cout.width(25);
@@ -85,27 +79,23 @@ namespace seneca
             cout << taxedPrice << "|";
             cout.unsetf(ios::left);
 
-            if (m_isDailySpecial)
-            {
+            if (m_isDailySpecial) {
                 cout.width(13);
                 cout << taxedPrice - g_dailydiscount << endl;
             }
-            else
-            {
+            else {
                 cout << endl;
             }
             cout.unsetf(ios::fixed);
         }
-        else
-        {
+        else {
             cout << "No Order" << endl;
         }
     }
 
 
     // Copy Constructor of food order
-    FoodOrder::FoodOrder(const FoodOrder& src)
-    {
+    FoodOrder::FoodOrder(const FoodOrder& src) {
         // Shallow copy of non-dynamic data members
         strcpy(m_custName, src.m_custName);
         m_price = src.m_price;
@@ -117,8 +107,7 @@ namespace seneca
     }
 
     // Copy assignment operator of food order
-    FoodOrder& FoodOrder::operator=(const FoodOrder& src)
-    {
+    FoodOrder& FoodOrder::operator=(const FoodOrder& src) {
         // Check for self-assignment
         if (this != &src) {
             // Shallow copy of non-dynamic data members
